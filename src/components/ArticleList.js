@@ -7,7 +7,7 @@ export default function ArticleList(props) {
     return (
         <div>
             <h2>Article List</h2>
-            <ul>
+            <ul className="article-list">
                 {/*some comment*/}
                 {articleElements}
             </ul>
