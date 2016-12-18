@@ -27,11 +27,13 @@ export default class CommentsList extends Component {
         if (comments) {
             commentsElements = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>);
         } else {
+            //пустая строка - не лучший выбор, лучше бы [], null или undefined
             commentsElements = '';
         }
 
         if (!this.state.isOpen) {
             commentsLabel = 'Show comments';
+            //если уже сравниваешь с '', то делай !==
             if (commentsElements != '') {
                 return (
                     <div>
