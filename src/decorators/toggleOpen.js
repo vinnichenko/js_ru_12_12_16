@@ -1,10 +1,12 @@
 //decorator === HOC(Higher Order Component)
 import React from 'react'
 
+//для этого следовало завести отдельный декоратор
 export default function toggleOpen(Component) {
     return class WrapperComponent extends React.Component {
         state = {
             isOpen: false,
+            //суть декораторов в переисползовании кода, не привязывайся к названиям сущностей. Лучше openItemId
             openArticleId: null
         }
         render() {
@@ -21,6 +23,7 @@ export default function toggleOpen(Component) {
         }
 
         toggleOpenArticle = id => ev => {
+            //лучше не делай два setState - сбивает с толку, тяжело читается
             this.setState({
                 openArticleId: id
             });
