@@ -30,7 +30,12 @@ export default class ArticleList extends React.Component {
     toggleOpenArticle = id => ev => {
         this.setState({
             openArticleId: id
-        })
+        });
+        if (this.state.openArticleId == id) {
+            this.setState({
+                openArticleId: null
+            });
+        }
     }
 }
 
