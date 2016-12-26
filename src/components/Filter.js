@@ -27,11 +27,12 @@ class Filter extends Component {
 
                 { !from && !to && <p>Please select the <strong>first day</strong>.</p> }
                 { from && !to && <p>Please select the <strong>last day</strong>.</p> }
-                { from && to && console.log(from, to) }
+            {/*у тебя from и to - это Date, чтоб его вывести следует привести его к строке, например from.toString()*/}    
+            { from && to && console.log(from, to) }
                 {/*
 
                 It doesn't work properly: http://prntscr.com/dnnyh5
-
+                
                 { from && to &&
                 <p>
                     You've chosen from { from } to { to }.
