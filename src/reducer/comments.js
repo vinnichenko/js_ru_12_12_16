@@ -1,4 +1,4 @@
-import {  } from '../constants'
+import { ADD_COMMENT } from '../constants'
 import { normalizedComments } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record } from 'immutable'
@@ -11,12 +11,14 @@ const CommentModel = Record({
 
 const defaultState = arrayToMap(normalizedComments, CommentModel)
 
-export default (state = defaultState, action) => {
-    const { type, payload, response, error } = action
+export default (commentsState = defaultState, action) => {
+    const { type, payload } = action
 
     switch (type) {
-
+        case ADD_COMMENT:
+            console.log('adding a comment');
+            return commentsState.set(payload.comment);
     }
 
-    return state
+    return commentsState
 }
