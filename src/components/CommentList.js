@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import {addComment} from '../AC'
+import { mapToArray } from '../helpers'
+import {addComment, loadCommentsForArticle} from '../AC'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
@@ -10,6 +11,10 @@ class CommentList extends Component {
         article: PropTypes.object,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.isOpen && nextProps.isOpen) nextProps.loadCommentsForArticle(nextProps.article.id)
     }
 
     render() {
@@ -45,6 +50,6 @@ class CommentList extends Component {
 
 export default connect((storeState, props) => {
     return {
-        comments: props.article.comments.map(id => storeState.comments.get(id))
+        comments: mapToArray(storeState.comments.entities)
     }
-}, { addComment })(toggleOpen(CommentList))
+}, { addComment, loadCommentsForArticle })(toggleOpen(CommentList))

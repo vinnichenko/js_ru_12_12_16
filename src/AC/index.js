@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE,
+import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_COMMENTS,
     START, SUCCESS, FAIL } from '../constants'
 import $ from 'jquery'
 
@@ -48,6 +48,29 @@ export function loadArticleById(id) {
             .fail(error => dispatch({
                 type: LOAD_ARTICLE + FAIL,
                 payload: { id },
+                error
+            }))
+    }
+}
+
+export function loadCommentsForArticle(articleId) {
+    return (dispatch, getState) => {
+        if (getState().comments.loaded === articleId) return null
+
+        dispatch({
+            type: LOAD_COMMENTS + START,
+            payload: { articleId }
+        })
+
+        $.get(`/api/comment?article=${articleId}`)
+            .done(response => dispatch({
+                type: LOAD_COMMENTS + SUCCESS,
+                payload: { articleId },
+                response
+            }))
+            .fail(error => dispatch({
+                type: LOAD_COMMENTS + FAIL,
+                payload: { articleId },
                 error
             }))
     }
