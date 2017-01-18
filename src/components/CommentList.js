@@ -33,6 +33,7 @@ class CommentList extends Component {
     }
 
     getBody() {
+        //еще лоадер нужен был
         const { comments, article, isOpen, addComment } = this.props
         if (!isOpen) return null
         const form = <NewCommentForm addComment={(comment) => addComment(article.id, comment)} />
