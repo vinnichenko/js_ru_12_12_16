@@ -55,6 +55,7 @@ export function loadArticleById(id) {
 
 export function loadCommentsForArticle(articleId) {
     return (dispatch, getState) => {
+        //а если ты потом комменты для другой статьи откроешь?
         if (getState().comments.loaded === articleId) return null
 
         dispatch({
